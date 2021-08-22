@@ -1,10 +1,10 @@
 # CG.Blazor.Forms._MudBlazor: 
 
 ---
-[![Build Status](https://dev.azure.com/codegator/CG.Blazor.Forms._MudBlazor/_apis/build/status/CodeGator.CG.Blazor.Forms._MudBlazor?branchName=main)](https://dev.azure.com/codegator/CG.Blazor.Forms._MudBlazor/_build/latest?definitionId=72&branchName=main)
+[![Build Status](https://dev.azure.com/codegator/CG.Blazor.Forms._MudBlazor/_apis/build/status/CodeGator.CG.Blazor.Forms._MudBlazor?branchName=main)](https://dev.azure.com/codegator/CG.Blazor.Forms._MudBlazor/_build/latest?definitionId=74&branchName=main)
 [![Github docs](https://img.shields.io/static/v1?label=Documentation&message=online&color=blue)](https://codegator.github.io/CG.Blazor.Forms._MudBlazor/index.html)
 [![NuGet downloads](https://img.shields.io/nuget/dt/CG.Blazor.Forms._MudBlazor.svg?style=flat)](https://nuget.org/packages/CG.Blazor.Forms._MudBlazor)
-![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Blazor.Forms._MudBlazor/72)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Blazor.Forms._MudBlazor/74)
 [![Github discussion](https://img.shields.io/badge/Discussion-online-blue)](https://github.com/CodeGator/CG.Blazor.Forms._MudBlazor/discussions)
 [![CG.Blazor.Forms._MudBlazor on fuget.org](https://www.fuget.org/packages/CG.Blazor.Forms._MudBlazor/badge.svg)](https://www.fuget.org/packages/CG.Blazor.Forms._MudBlazor)
 

@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>CG.Blazor.Forms</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Martin Cook</Authors>
+    <Company>CodeGator</Company>
+    <Description>This package contains MudBlazor extensions used by the CG.Blazor.Forms package. 
+
+Platforms supported:
+    .NET 5.x or above</Description>
+    <Copyright>Copyright © 2021 by CodeGator. All rights reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/CodeGator/CG.Blazor.Forms._MudBlazor</PackageProjectUrl>
+    <PackageIcon>packageDefaultIcon-50x50.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/CodeGator/CG.Blazor.Forms._MudBlazor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>forms, code generator, mudblazor, CG.Blazor.Forms._MudBlazor, CodeGator</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\net5.0\CG.Blazor.Forms._MudBlazor.xml</DocumentationFile>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CG.Blazor.Forms" Version="2021.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.9" />
+    <PackageReference Include="MudBlazor" Version="5.1.1" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\packageDefaultIcon-50x50.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

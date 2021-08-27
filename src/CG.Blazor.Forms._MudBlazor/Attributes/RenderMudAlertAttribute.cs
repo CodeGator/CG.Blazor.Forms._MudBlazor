@@ -31,7 +31,7 @@ namespace CG.Blazor.Forms.Attributes
     /// }
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class RenderMudAlertAttribute : MudBlazorAttribute
     {
         // *******************************************************************
@@ -225,11 +225,12 @@ namespace CG.Blazor.Forms.Attributes
             Guard.Instance().ThrowIfNull(builder, nameof(builder))
                 .ThrowIfLessThanZero(index, nameof(index))
                 .ThrowIfNull(path, nameof(path))
+                .ThrowIfNull(prop, nameof(prop))
                 .ThrowIfNull(logger, nameof(logger));
 
             try
             {
-                // If we get here then we are trying to render a MudTextField component
+                // If we get here then we are trying to render a MudAlert component
                 //   and bind it to the specified string property.
 
                 // Should never happen, but, pffft, check it anyway.
@@ -243,6 +244,9 @@ namespace CG.Blazor.Forms.Attributes
                     // Return the index.
                     return index;
                 }
+
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
 
                 // Get the model reference.
                 var model = path.Peek();
@@ -259,19 +263,20 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
-                // Get the model's type.
-                var modelType = model.GetType();
+                // Get the property type.
+                var propertyType = prop.PropertyType;
 
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
                 // We only render MudAlert controls against strings.
-                if (modelType == typeof(string))
+                if (propertyType == typeof(string))
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Rendering property: '{PropName}' as a MudAlert.",
-                        prop.Name
+                        "Rendering property: '{PropPath}' as a MudAlert. [idx: '{Index}']",
+                        propPath,
+                        index
                         );
 
                     // Get any non-default attribute values (overrides).
@@ -283,22 +288,21 @@ namespace CG.Blazor.Forms.Attributes
                         attributes: attributes,
                         contentDelegate: childBuilder =>
                         {
-                    // Add the child content.
-                    childBuilder.AddContent(
-                                index++,
-                                (string)prop.GetValue(propParent)
-                                );
+                            // Add the child content.
+                            childBuilder.AddContent(
+                                        index++,
+                                        (string)prop.GetValue(propParent)
+                                        );
                         });
                 }
                 else
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud alert components on properties " +
-                        "that are of type: string. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudAlert components on properties of type: string. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
                         prop.PropertyType.Name
                         );
                 }
@@ -310,7 +314,7 @@ namespace CG.Blazor.Forms.Attributes
             {
                 // Give the error better context.
                 throw new FormGenerationException(
-                    message: "Failed to render a mud alert field! " +
+                    message: "Failed to render a MudAlert component! " +
                         "See inner exception(s) for more detail.",
                     innerException: ex
                     );

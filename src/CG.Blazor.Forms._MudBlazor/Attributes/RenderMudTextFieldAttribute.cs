@@ -34,7 +34,7 @@ namespace CG.Blazor.Forms.Attributes
     /// }
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class RenderMudTextFieldAttribute : MudBlazorAttribute
     {
         // *******************************************************************
@@ -394,6 +394,7 @@ namespace CG.Blazor.Forms.Attributes
             Guard.Instance().ThrowIfNull(builder, nameof(builder))
                 .ThrowIfLessThanZero(index, nameof(index))
                 .ThrowIfNull(path, nameof(path))
+                .ThrowIfNull(prop, nameof(prop))
                 .ThrowIfNull(logger, nameof(logger));
 
             try
@@ -413,6 +414,9 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
+
                 // Get the model reference.
                 var model = path.Peek();
 
@@ -428,19 +432,17 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
-                // Get the model's type.
-                var modelType = model.GetType();
-
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
                 // We only render MudTextField controls against strings.
-                if (modelType == typeof(string))
+                if (prop.PropertyType == typeof(string))
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Rendering property: '{PropName}' as a MudTextField.",
-                        prop.Name
+                        "Rendering property: '{PropPath}' as a MudTextField. [idx: '{Index}']",
+                        propPath,
+                        index
                         );
 
                     // Get any non-default attribute values (overrides).
@@ -484,7 +486,7 @@ namespace CG.Blazor.Forms.Attributes
 
                     // Render the property as a MudTextField control.
                     index = builder.RenderUIComponent<MudTextField<string>>(
-                        index++,
+                        index,
                         attributes: attributes
                         );
                 }
@@ -492,11 +494,10 @@ namespace CG.Blazor.Forms.Attributes
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud text field components on properties " +
-                        "that are of type: string. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudTextField components on properties of type: string. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
                         prop.PropertyType.Name
                         );
                 }

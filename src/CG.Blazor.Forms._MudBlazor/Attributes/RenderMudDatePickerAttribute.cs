@@ -13,13 +13,13 @@ using System.Reflection;
 namespace CG.Blazor.Forms.Attributes
 {
     /// <summary>
-    /// This class is an attribute that, when applied to a <see cref="DateTime?"/> property, 
+    /// This class is an attribute that, when applied to a <see cref="Nullable{DateTime}"/> property, 
     /// causes the form generator to render the property as a <see cref="MudDatePicker"/> 
     /// component.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This attribute is only valid when placed on a property of type: <see cref="DateTime?"/>.
+    /// This attribute is only valid when placed on a property of type: <see cref="Nullable{DateTime}"/>.
     /// </para>
     /// </remarks>
     /// <example>
@@ -531,6 +531,7 @@ namespace CG.Blazor.Forms.Attributes
             Guard.Instance().ThrowIfNull(builder, nameof(builder))
                 .ThrowIfLessThanZero(index, nameof(index))
                 .ThrowIfNull(path, nameof(path))
+                .ThrowIfNull(prop, nameof(prop))
                 .ThrowIfNull(logger, nameof(logger));
 
             try
@@ -550,6 +551,9 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
+
                 // Get the model reference.
                 var model = path.Peek();
 
@@ -560,65 +564,36 @@ namespace CG.Blazor.Forms.Attributes
                     model = default(DateTime);
                 }
 
-                // Get the model's type.
-                var modelType = model.GetType();
+                // Get the property type.
+                var propertyType = prop.PropertyType;
 
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
-                // We only render MudDatePicker controls against DateTimes.
-                if (modelType == typeof(DateTime))
+                // Should we bind to a DateTime?
+                if (propertyType == typeof(DateTime))
                 {
-                    // Let the world know what we're doing.
-                    logger.LogDebug(
-                        "Rendering property: '{PropName}' as a MudAlert.",
-                        prop.Name
-                        );
-
-                    // Get any non-default attribute values (overrides).
-                    var attributes = ToAttributes();
-
-                    // Did we not override the label?
-                    if (false == attributes.ContainsKey("Label"))
-                    {
-                        // Ensure we have a label.
-                        attributes["Label"] = prop.Name;
-                    }
-
-                    // Is this NOT a dummy value?
-                    if (false == default(DateTime).Equals((DateTime?)model))
-                    {
-                        // Ensure the property value is set.
-                        attributes["Date"] = (DateTime?)prop.GetValue(propParent);
-                    }
-
-                    // Ensure the property is bound, both ways.
-                    attributes["DateChanged"] = RuntimeHelpers.TypeCheck<EventCallback<DateTime?>>(
-                        EventCallback.Factory.Create<DateTime?>(
-                            eventTarget,
-                            EventCallback.Factory.CreateInferred<DateTime?>(
-                                eventTarget,
-                                x => prop.SetValue(propParent, x),
-                                (DateTime?)prop.GetValue(propParent)
-                                )
-                            )
-                        );
-
-                    // Render the property as a MudDatePicker control.
-                    index = builder.RenderUIComponent<MudDatePicker>(
-                        index++,
-                        attributes: attributes
+                    index = BindToDateTime(
+                        builder,
+                        index,
+                        eventTarget,
+                        prop,
+                        logger,
+                        propertyType,
+                        model,
+                        propParent,
+                        propPath
                         );
                 }
+
                 else
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud date picker components on properties " +
-                        "that are of type: string. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudDatePicker components on properties of type: DateTime. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
                         prop.PropertyType.Name
                         );
                 }
@@ -630,11 +605,94 @@ namespace CG.Blazor.Forms.Attributes
             {
                 // Give the error better context.
                 throw new FormGenerationException(
-                    message: "Failed to render a mud date picker field! " +
+                    message: "Failed to render a MudDatePicker component! " +
                         "See inner exception(s) for more detail.",
                     innerException: ex
                     );
             }
+        }
+
+        #endregion
+
+        // *******************************************************************
+        // Private methods.
+        // *******************************************************************
+
+        #region Private methods
+
+        /// <summary>
+        /// This method generates a MudDatePicker control that is bound to 
+        /// a DateTime property.
+        /// </summary>
+        /// <param name="builder">The builder to use for the operation.</param>
+        /// <param name="index">The index to use for the operation.</param>
+        /// <param name="eventTarget">The event target to use for the 
+        /// operation.</param>
+        /// <param name="prop">The reflection information for the property.</param>
+        /// <param name="logger">The logger to use for the operation.</param>
+        /// <param name="propertyType">The type of property to use for the 
+        /// operation.</param>
+        /// <param name="model">The model to use for the operation.</param>
+        /// <param name="propParent">The property parent to use for the 
+        /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
+        /// <returns>The index after rendering is complete.</returns>
+        private int BindToDateTime(
+            RenderTreeBuilder builder,
+            int index,
+            IHandleEvent eventTarget,
+            PropertyInfo prop,
+            ILogger<IFormGenerator> logger,
+            Type propertyType,
+            object model,
+            object propParent,
+            string propPath
+            )
+        {
+            // Let the world know what we're doing.
+            logger.LogDebug(
+                "Rendering property: '{PropPath}' as a MudTimePicker. [idx: '{Index}']",
+                propPath,
+                index
+                );
+
+            // Get any non-default attribute values (overrides).
+            var attributes = ToAttributes();
+
+            // Did we not override the label?
+            if (false == attributes.ContainsKey("Label"))
+            {
+                // Ensure we have a label.
+                attributes["Label"] = prop.Name;
+            }
+
+            // Is this NOT a dummy value?
+            if (false == default(DateTime).Equals((DateTime?)model))
+            {
+                // Ensure the property value is set.
+                attributes["Date"] = (DateTime?)prop.GetValue(propParent);
+            }
+
+            // Ensure the property is bound, both ways.
+            attributes["DateChanged"] = RuntimeHelpers.TypeCheck<EventCallback<DateTime?>>(
+                EventCallback.Factory.Create<DateTime?>(
+                    eventTarget,
+                    EventCallback.Factory.CreateInferred<DateTime?>(
+                        eventTarget,
+                        x => prop.SetValue(propParent, x),
+                        (DateTime?)prop.GetValue(propParent)
+                        )
+                    )
+                );
+
+            // Render as a MudDatePicker control.
+            index = builder.RenderUIComponent<MudDatePicker>(
+                index++,
+                attributes: attributes
+                );
+
+            // Return the index.
+            return index;
         }
 
         #endregion

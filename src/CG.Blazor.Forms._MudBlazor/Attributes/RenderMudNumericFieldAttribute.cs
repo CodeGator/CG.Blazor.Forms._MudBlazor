@@ -21,7 +21,7 @@ namespace CG.Blazor.Forms.Attributes
     /// <remarks>
     /// <para>
     /// This attribute is only valid when placed on a property of type: numeric,
-    /// which means: byte, int, long, float, double, decimal.
+    /// which means: byte, short, int, long, float, double, decimal.
     /// </para>
     /// </remarks>
     /// <example>
@@ -440,6 +440,9 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
+
                 // Get the model reference.
                 var model = path.Peek();
 
@@ -461,7 +464,25 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
+                        );
+                }
+
+                // Should we bind to a short?
+                else if (propertyType == typeof(short) ||
+                    propertyType == typeof(Nullable<short>))
+                {
+                    index = BindToShort(
+                        builder,
+                        index,
+                        eventTarget,
+                        prop,
+                        logger,
+                        propertyType,
+                        model,
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -477,7 +498,8 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -493,7 +515,8 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -509,7 +532,8 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -525,7 +549,8 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -541,7 +566,8 @@ namespace CG.Blazor.Forms.Attributes
                         logger,
                         propertyType,
                         model,
-                        propParent
+                        propParent,
+                        propPath
                         );
                 }
 
@@ -550,12 +576,11 @@ namespace CG.Blazor.Forms.Attributes
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud numeric components on properties " +
-                        "that are of type: numeric. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
-                        propertyType.Name
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudTextField components on properties of type: string. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
+                        prop.PropertyType.Name
                         );
                 }
 
@@ -566,7 +591,7 @@ namespace CG.Blazor.Forms.Attributes
             {
                 // Give the error better context.
                 throw new FormGenerationException(
-                    message: "Failed to render a mud numeric field! " +
+                    message: "Failed to render a MudNumericField! " +
                         "See inner exception(s) for more detail.",
                     innerException: ex
                     );
@@ -596,6 +621,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToByte(
             RenderTreeBuilder builder,
@@ -605,13 +631,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropPath}' as a MudNumericField. [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -624,7 +652,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(byte))
             {
                 // Is there a value?
@@ -712,6 +740,138 @@ namespace CG.Blazor.Forms.Attributes
 
         /// <summary>
         /// This method generates a MudNumericField control that is bound to 
+        /// a short property.
+        /// </summary>
+        /// <param name="builder">The builder to use for the operation.</param>
+        /// <param name="index">The index to use for the operation.</param>
+        /// <param name="eventTarget">The event target to use for the 
+        /// operation.</param>
+        /// <param name="prop">The reflection information for the property.</param>
+        /// <param name="logger">The logger to use for the operation.</param>
+        /// <param name="propertyType">The type of property to use for the 
+        /// operation.</param>
+        /// <param name="model">The model to use for the operation.</param>
+        /// <param name="propParent">The property parent to use for the 
+        /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
+        /// <returns>The index after rendering is complete.</returns>
+        private int BindToShort(
+            RenderTreeBuilder builder,
+            int index,
+            IHandleEvent eventTarget,
+            PropertyInfo prop,
+            ILogger<IFormGenerator> logger,
+            Type propertyType,
+            object model,
+            object propParent,
+            string propPath
+            )
+        {
+            // Let the world know what we're doing.
+            logger.LogDebug(
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
+                );
+
+            // Get any non-default attribute values (overrides).
+            var attributes = ToAttributes();
+
+            // Did we not override the label?
+            if (false == attributes.ContainsKey("Label"))
+            {
+                // Ensure the Label property is set.
+                attributes["Label"] = prop.Name;
+            }
+
+            // Is the property NOT nullable?
+            if (propertyType == typeof(short))
+            {
+                // Is there a value?
+                if (null != model)
+                {
+                    // Ensure the Value property value is set.
+                    attributes["Value"] = (short)prop.GetValue(propParent);
+                }
+
+                // Ensure the Value property is bound, both ways.
+                attributes["ValueChanged"] = RuntimeHelpers.TypeCheck<EventCallback<short>>(
+                    EventCallback.Factory.Create<short>(
+                        eventTarget,
+                        EventCallback.Factory.CreateInferred<short>(
+                            eventTarget,
+                            x => prop.SetValue(propParent, x),
+                            null != model ? (short)prop.GetValue(propParent) : (short)0
+                            )
+                        )
+                    );
+
+                // Ensure the For property value is set.
+                attributes["For"] = Expression.Lambda<Func<short>>(
+                    MemberExpression.Property(
+                        Expression.Constant(
+                            propParent,
+                            propParent.GetType()
+                            ),
+                        prop.Name
+                        )
+                    );
+
+                // Render as a MudNumericField control.
+                index = builder.RenderUIComponent<MudNumericField<short>>(
+                    index++,
+                    attributes: attributes
+                    );
+            }
+
+            // Otherwise, the property IS nullable.
+            else
+            {
+                // Is there a value?
+                if (null != model)
+                {
+                    // Ensure the Value property value is set.
+                    attributes["Value"] = (short?)prop.GetValue(propParent);
+                }
+
+                // Ensure the Value property is bound, both ways.
+                attributes["ValueChanged"] = RuntimeHelpers.TypeCheck<EventCallback<short?>>(
+                    EventCallback.Factory.Create<short?>(
+                        eventTarget,
+                        EventCallback.Factory.CreateInferred<short?>(
+                            eventTarget,
+                            x => prop.SetValue(propParent, x),
+                            null != model ? (short?)prop.GetValue(propParent) : (short?)0
+                            )
+                        )
+                    );
+
+                // Ensure the For property value is set.
+                attributes["For"] = Expression.Lambda<Func<short?>>(
+                    MemberExpression.Property(
+                        Expression.Constant(
+                            propParent,
+                            propParent.GetType()
+                            ),
+                        prop.Name
+                        )
+                    );
+
+                // Render as a MudNumericField control.
+                index = builder.RenderUIComponent<MudNumericField<short?>>(
+                    index++,
+                    attributes: attributes
+                    );
+            }
+
+            // Return the index.
+            return index;
+        }
+
+        // *******************************************************************
+
+        /// <summary>
+        /// This method generates a MudNumericField control that is bound to 
         /// an int property.
         /// </summary>
         /// <param name="builder">The builder to use for the operation.</param>
@@ -725,6 +885,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToInt(
             RenderTreeBuilder builder,
@@ -734,13 +895,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -753,7 +916,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(int))
             {
                 // Is there a value?
@@ -854,6 +1017,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToLong(
             RenderTreeBuilder builder,
@@ -863,13 +1027,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -882,7 +1048,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(long))
             {
                 // Is there a value?
@@ -983,6 +1149,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToFloat(
             RenderTreeBuilder builder,
@@ -992,13 +1159,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -1011,7 +1180,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(float))
             {
                 // Is there a value?
@@ -1112,6 +1281,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToDouble(
             RenderTreeBuilder builder,
@@ -1121,13 +1291,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -1140,7 +1312,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(double))
             {
                 // Is there a value?
@@ -1241,6 +1413,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="model">The model to use for the operation.</param>
         /// <param name="propParent">The property parent to use for the 
         /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
         /// <returns>The index after rendering is complete.</returns>
         private int BindToDecimal(
             RenderTreeBuilder builder,
@@ -1250,13 +1423,15 @@ namespace CG.Blazor.Forms.Attributes
             ILogger<IFormGenerator> logger,
             Type propertyType,
             object model,
-            object propParent
+            object propParent,
+            string propPath
             )
         {
             // Let the world know what we're doing.
             logger.LogDebug(
-                "Rendering property: '{PropName}' as a MudNumericField.",
-                prop.Name
+                "Rendering property: '{PropName}' as a MudNumericField.  [idx: '{Index}']",
+                propPath,
+                index
                 );
 
             // Get any non-default attribute values (overrides).
@@ -1269,7 +1444,7 @@ namespace CG.Blazor.Forms.Attributes
                 attributes["Label"] = prop.Name;
             }
 
-            // Is the NOT property nullable?
+            // Is the property NOT nullable?
             if (propertyType == typeof(decimal))
             {
                 // Is there a value?

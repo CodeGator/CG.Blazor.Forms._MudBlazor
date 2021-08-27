@@ -32,9 +32,9 @@ Platforms supported:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Blazor.Forms" Version="2021.2.2" />
+    <PackageReference Include="CG.Blazor.Forms" Version="2021.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.9" />
-    <PackageReference Include="MudBlazor" Version="5.1.1" />
+    <PackageReference Include="MudBlazor" Version="5.1.2" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

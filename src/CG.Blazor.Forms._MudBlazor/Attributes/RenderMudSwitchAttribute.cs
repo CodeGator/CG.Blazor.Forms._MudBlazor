@@ -157,6 +157,7 @@ namespace CG.Blazor.Forms.Attributes
             Guard.Instance().ThrowIfNull(builder, nameof(builder))
                 .ThrowIfLessThanZero(index, nameof(index))
                 .ThrowIfNull(path, nameof(path))
+                .ThrowIfNull(prop, nameof(prop))
                 .ThrowIfNull(logger, nameof(logger));
 
             try
@@ -176,6 +177,9 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
+
                 // Get the model reference.
                 var model = path.Peek();
 
@@ -191,19 +195,17 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
-                // Get the model's type.
-                var modelType = model.GetType();
-
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
-                // We only render MudSwitch controls against booleans.
-                if (modelType == typeof(bool))
+                // We only render MudSwitch controls against bools.
+                if (prop.PropertyType == typeof(bool))
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Rendering property: '{PropName}' as a MudSwitch.",
-                        prop.Name
+                        "Rendering property: '{PropPath}' as a MudSwitch. [idx: '{Index}']",
+                        propPath,
+                        index
                         );
 
                     // Get any non-default attribute values (overrides).
@@ -241,11 +243,10 @@ namespace CG.Blazor.Forms.Attributes
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud switch components on properties " +
-                        "that are of type: string. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudSwitch components on properties of type: bool. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
                         prop.PropertyType.Name
                         );
                 }
@@ -257,7 +258,7 @@ namespace CG.Blazor.Forms.Attributes
             {
                 // Give the error better context.
                 throw new FormGenerationException(
-                    message: "Failed to render a mud switch field! " +
+                    message: "Failed to render a MudSwitch component! " +
                         "See inner exception(s) for more detail.",
                     innerException: ex
                     );

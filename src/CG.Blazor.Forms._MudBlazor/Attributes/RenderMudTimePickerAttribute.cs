@@ -8,6 +8,7 @@ using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace CG.Blazor.Forms.Attributes
@@ -450,6 +451,7 @@ namespace CG.Blazor.Forms.Attributes
             Guard.Instance().ThrowIfNull(builder, nameof(builder))
                 .ThrowIfLessThanZero(index, nameof(index))
                 .ThrowIfNull(path, nameof(path))
+                .ThrowIfNull(prop, nameof(prop))
                 .ThrowIfNull(logger, nameof(logger));
 
             try
@@ -469,6 +471,9 @@ namespace CG.Blazor.Forms.Attributes
                     return index;
                 }
 
+                // Create a complete property path, for logging.
+                var propPath = $"{string.Join('.', path.Skip(1).Reverse().Select(x => x.GetType().Name))}.{prop.Name}";
+
                 // Get the model reference.
                 var model = path.Peek();
 
@@ -478,66 +483,38 @@ namespace CG.Blazor.Forms.Attributes
                     // Supply a dummy value, for now.
                     model = default(TimeSpan);
                 }
-
-                // Get the model's type.
-                var modelType = model.GetType();
+                
+                // Get the property type.
+                var propertyType = prop.PropertyType;
 
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
-                // We only render MudTimePicker controls against TimeSpans.
-                if (modelType == typeof(TimeSpan))
+                // Should we bind to a TimeSpan?
+                if (propertyType == typeof(TimeSpan))
                 {
-                    // Let the world know what we're doing.
-                    logger.LogDebug(
-                        "Rendering property: '{PropName}' as a MudTimePicker.",
-                        prop.Name
-                        );
-
-                    // Get any non-default attribute values (overrides).
-                    var attributes = ToAttributes();
-
-                    // Did we not override the label?
-                    if (false == attributes.ContainsKey("Label"))
-                    {
-                        // Ensure we have a label.
-                        attributes["Label"] = prop.Name;
-                    }
-
-                    // Is this NOT a dummy value?
-                    if (false == default(TimeSpan).Equals((TimeSpan?)model))
-                    {
-                        // Ensure the property value is set.
-                        attributes["Time"] = (TimeSpan?)prop.GetValue(propParent);
-                    }
-
-                    // Ensure the property is bound, both ways.
-                    attributes["TimeChanged"] = RuntimeHelpers.TypeCheck<EventCallback<TimeSpan?>>(
-                        EventCallback.Factory.Create<TimeSpan?>(
-                            eventTarget,
-                            EventCallback.Factory.CreateInferred<TimeSpan?>(
-                                eventTarget,
-                                x => prop.SetValue(propParent, x),
-                                (TimeSpan?)prop.GetValue(propParent)
-                                )
-                            )
-                        );
-
-                    // Render the property as a MudTimePicker control.
-                    index = builder.RenderUIComponent<MudTimePicker>(
-                        index++,
-                        attributes: attributes
+                    index = BindToTimeSpan(
+                        builder,
+                        index,
+                        eventTarget,
+                        prop,
+                        logger,
+                        propertyType,
+                        model,
+                        propParent,
+                        propPath
                         );
                 }
+
+                // Otherwise, we don't know this type ...
                 else
                 {
                     // Let the world know what we're doing.
                     logger.LogDebug(
-                        "Ignoring property: '{PropName}' on: '{ObjName}' " +
-                        "because we only render mud time picker components on properties " +
-                        "that are of type: string. That property is of type: '{PropType}'!",
-                        prop.Name,
-                        propParent.GetType().Name,
+                        "Not rendering property: '{PropPath}' since we only render " +
+                        "MudTimePicker components on properties of type: TimeSpan. " +
+                        "That property is of type: '{PropType}'!",
+                        propPath,
                         prop.PropertyType.Name
                         );
                 }
@@ -554,6 +531,89 @@ namespace CG.Blazor.Forms.Attributes
                     innerException: ex
                     );
             }
+        }
+
+        #endregion
+
+        // *******************************************************************
+        // Private methods.
+        // *******************************************************************
+
+        #region Private methods
+
+        /// <summary>
+        /// This method generates a MudTimePicker control that is bound to 
+        /// a TimeSpan property.
+        /// </summary>
+        /// <param name="builder">The builder to use for the operation.</param>
+        /// <param name="index">The index to use for the operation.</param>
+        /// <param name="eventTarget">The event target to use for the 
+        /// operation.</param>
+        /// <param name="prop">The reflection information for the property.</param>
+        /// <param name="logger">The logger to use for the operation.</param>
+        /// <param name="propertyType">The type of property to use for the 
+        /// operation.</param>
+        /// <param name="model">The model to use for the operation.</param>
+        /// <param name="propParent">The property parent to use for the 
+        /// operation.</param>
+        /// <param name="propPath">The complete path to the property.</param>
+        /// <returns>The index after rendering is complete.</returns>
+        private int BindToTimeSpan(
+            RenderTreeBuilder builder,
+            int index,
+            IHandleEvent eventTarget,
+            PropertyInfo prop,
+            ILogger<IFormGenerator> logger,
+            Type propertyType,
+            object model,
+            object propParent,
+            string propPath
+            )
+        {
+            // Let the world know what we're doing.
+            logger.LogDebug(
+                "Rendering property: '{PropPath}' as a MudTimePicker. [idx: '{Index}']",
+                propPath,
+                index
+                );
+
+            // Get any non-default attribute values (overrides).
+            var attributes = ToAttributes();
+
+            // Did we not override the label?
+            if (false == attributes.ContainsKey("Label"))
+            {
+                // Ensure we have a label.
+                attributes["Label"] = prop.Name;
+            }
+
+            // Is this NOT a dummy value?
+            if (false == default(TimeSpan).Equals((TimeSpan?)model))
+            {
+                // Ensure the property value is set.
+                attributes["Time"] = (TimeSpan?)prop.GetValue(propParent);
+            }
+
+            // Ensure the property is bound, both ways.
+            attributes["TimeChanged"] = RuntimeHelpers.TypeCheck<EventCallback<TimeSpan?>>(
+                EventCallback.Factory.Create<TimeSpan?>(
+                    eventTarget,
+                    EventCallback.Factory.CreateInferred<TimeSpan?>(
+                        eventTarget,
+                        x => prop.SetValue(propParent, x),
+                        (TimeSpan?)prop.GetValue(propParent)
+                        )
+                    )
+                );
+
+            // Render as a MudTimePicker control.
+            index = builder.RenderUIComponent<MudTimePicker>(
+                index++,
+                attributes: attributes
+                );
+
+            // Return the index.
+            return index;
         }
 
         #endregion

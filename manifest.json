@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.MudBlazorAttribute.html",
-          "hash": "7IUR+PvhCRNkyoNoOD7Rj2iSrQPehzo9f+PcK3NxakM="
+          "hash": "tve6spQFlsAPAO9djCDhq9AfJ6qaM4hAnAPE8gMY4wc="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudAlertAttribute.html",
-          "hash": "M7FG1YzSDvPqFkAqxCuvxUc8U5SBrbbD6K6r5QWIqRI="
+          "hash": "8Nwg4ansyKLwBOi7dBYtLpGkNMiOUHOT49vTh2h9ARM="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudAutocompleteAttribute.html",
-          "hash": "DAWUcHul9LfTP2JVjQsLjWRR8O8qyfcmzVbb5DKOq9A="
+          "hash": "6Z+mBBPeuFYYqmyC1hZqzICeouQrrWtfEJSpiyoQC0w="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudCheckBoxAttribute.html",
-          "hash": "hYxbP6zNNT1Ye0ygOQNrkB58qHuZ+2ckIiw8T7J1vxk="
+          "hash": "ia9Wwc9penBpBbUigdFQcDKUN9KBqSUCRRNmSOpttz0="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudColorPickerAttribute.html",
-          "hash": "WX7Lp71fOueAZrzcEfS1us9gmDZMNVJlOOVzG72Pe2Q="
+          "hash": "0wReWVBXVB5DUBfbapMMj9PAOsx4piW4iWVBxwG8Ug4="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudDatePickerAttribute.html",
-          "hash": "bQpjD8gIAUU5EVftoBMzx1G1C0rqJYCNzt+nlPQf+Vk="
+          "hash": "P3NMTHVdvLjfz2SFDcYNyRghezBo+pNDIt6Ov8gFeOI="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudFieldAttribute.html",
-          "hash": "chdGy6v7czyWNeKLtMSe5k26d9XSS4gJZuY1HiOxutM="
+          "hash": "3pbhOvMVqMJKbJBcDwv79hubu+aQDLMYWSVp4utec6I="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudNumericFieldAttribute.html",
-          "hash": "YwaMxNp6NGmkkl/dmMZ6R22qmTdzeL34roxg0UOS0p0="
+          "hash": "yiocLfl3mgnENbcgfnfk1QnvQpHhRWE+CSxOUzbnq1k="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.html",
-          "hash": "b7oSSiz4Gdf/138hwCSm2rQowreY3J70R0JC4sfTFzE="
+          "hash": "celCZdjeuabVaKgDv4NCeUIWGUDZ2uC66ZHex9z/qDQ="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.html",
-          "hash": "P0Fmn6Oa+MeEcREI5HkGpJKcp4/+eYSIxY2E0FdgVmk="
+          "hash": "9l/4Whi1nwvUqxXXKRNeXqqo/QlEhigdEDkzgdqf5FE="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudSliderAttribute.html",
-          "hash": "rWjwYgAbBWD9fnwz6yks2uMveTOlYv8zWtSWVAEBEDs="
+          "hash": "+AW3qyYq/cWLuzGsRzliDAJ3LuH67FuChcyf0X3sYpc="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,31 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudSwitchAttribute.html",
-          "hash": "R1Nv69o+SK5H/jOXkk1i3yh7YpxEUXgBW8xY6gkttjo="
+          "hash": "OQoKXO2qGPSYRKLkpKWvZG0WSW/OA9v97SHKxQp7310="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTabPanelAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTabPanelAttribute.html",
+          "hash": "an35ygMc5DKZnzj0jmSzg7XD9+m0CJn+3cbMUnRAMDo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTabsAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTabsAttribute.html",
+          "hash": "lvQiX3Egy05viHm7FT1oGxWZQ40CD69XO4r0uIgyf2A="
         }
       },
       "is_incremental": false,
@@ -162,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTextFieldAttribute.html",
-          "hash": "f4l0g6dtv3gJ9ZpxA2/+Sld2nBHqD3vK6hmTBpSAZlM="
+          "hash": "qAPA3nIWwr0MY/u+tlgjEg4WZhvRXmBlM0x3HujT0sU="
         }
       },
       "is_incremental": false,
@@ -174,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMudTimePickerAttribute.html",
-          "hash": "m2rKgzktP15uiGXLaftnBrAwmxHwRuKUrTfVO89q6d4="
+          "hash": "qWFHyans3JYPBHprOJ4SB+2wYiSTXvsqwKINtC+tWYI="
         }
       },
       "is_incremental": false,
@@ -186,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.html",
-          "hash": "kFQBfRpVJcf9cRP1HdXKNdqWsejjqirtDRpmuWjpaFE="
+          "hash": "Qllv84xbhnxwaVTCgHxgmTr+Zr0My9qrEPFexVaDeRo="
         }
       },
       "is_incremental": false,
@@ -198,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "b5EJP1LLUDR4Wgi2GVa/KhJj3zA1hGqm+57ZGijT+lo="
+          "hash": "mLJwupoknFR14XB8kyHYu5/JpPO1CP+t5ZB+wmP+HGs="
         }
       },
       "is_incremental": false,
@@ -210,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "3lFGsZn+vpYCWz7OututIOBGsz91XMn2mjINvNxc584="
+          "hash": "exVg0miKSxAhrPsdEyYD3hCZPw//Hl1E+jJuAm1qqq4="
         }
       },
       "is_incremental": false,
@@ -278,7 +302,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "F3ZevHDFyJpObK/VK98IjBuPbIEMgyEwo3up1CXmYLA="
+          "hash": "BqEw7EdKGWzLtD3k0Syx5wAF+X+O3825golPXMh/PjA="
         }
       },
       "is_incremental": false,
@@ -317,7 +341,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 15,
+          "total_file_count": 17,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

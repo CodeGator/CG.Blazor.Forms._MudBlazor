@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class MudBlazorAttribute
+    <title>Class RenderMudTabsAttribute
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class MudBlazorAttribute
+    <meta name="title" content="Class RenderMudTabsAttribute
    ">
     <meta name="generator" content="docfx 2.58.2.0">
     
@@ -78,12 +78,14 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute">
+            <article class="content wrap" id="_content" data-uid="CG.Blazor.Forms.Attributes.RenderMudTabsAttribute">
   
   
-  <h1 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute" class="text-break">Class MudBlazorAttribute
+  <h1 id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute" data-uid="CG.Blazor.Forms.Attributes.RenderMudTabsAttribute" class="text-break">Class RenderMudTabsAttribute
   </h1>
-  <div class="markdown level0 summary"><p>This class is a base for all MudBlazor specific form generation attributes.</p>
+  <div class="markdown level0 summary"><p>This class is an attribute that, when applied to a class causes the form
+generator to render any instances of the class wrapped inside a <span class="xref">MudBlazor.MudTabs</span>
+component.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -91,24 +93,13 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">System.Attribute</span></div>
     <div class="level2"><span class="xref">CG.Blazor.Forms.Attributes.FormGeneratorAttribute</span></div>
-    <div class="level3"><span class="xref">MudBlazorAttribute</span></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudAlertAttribute.html">RenderMudAlertAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudAutocompleteAttribute.html">RenderMudAutocompleteAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudCheckBoxAttribute.html">RenderMudCheckBoxAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudColorPickerAttribute.html">RenderMudColorPickerAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudDatePickerAttribute.html">RenderMudDatePickerAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudFieldAttribute.html">RenderMudFieldAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudNumericFieldAttribute.html">RenderMudNumericFieldAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.html">RenderMudRadioGroupAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.html">RenderMudSelectAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudSliderAttribute.html">RenderMudSliderAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudTextFieldAttribute.html">RenderMudTextFieldAttribute</a></div>
-      <div class="level4"><a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudTimePickerAttribute.html">RenderMudTimePickerAttribute</a></div>
+    <div class="level3"><span class="xref">CG.Blazor.Forms.Attributes.RenderObjectAttribute</span></div>
+    <div class="level4"><span class="xref">RenderMudTabsAttribute</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">CG.Blazor.Forms.Attributes.FormGeneratorAttribute.Generate(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder, System.Int32, Microsoft.AspNetCore.Components.IHandleEvent, System.Collections.Generic.Stack&lt;System.Object&gt;, System.Reflection.PropertyInfo, Microsoft.Extensions.Logging.ILogger&lt;CG.Blazor.Forms.Services.IFormGenerator&gt;)</span>
+      <span class="xref">CG.Blazor.Forms.Attributes.FormGeneratorAttribute.ToAttributes()</span>
     </div>
     <div>
       <span class="xref">System.Attribute.Equals(System.Object)</span>
@@ -239,134 +230,90 @@
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="CG.Blazor.Forms.Attributes.html">CG.Blazor.Forms.Attributes</a></h6>
   <h6><strong>Assembly</strong>: CG.Blazor.Forms._MudBlazor.dll</h6>
-  <h5 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_syntax">Syntax</h5>
+  <h5 id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Property)]
-public abstract class MudBlazorAttribute : FormGeneratorAttribute</code></pre>
+    <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+public class RenderMudTabsAttribute : RenderObjectAttribute</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute__ctor_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.#ctor*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute__ctor" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.#ctor">MudBlazorAttribute()</h4>
-  <div class="markdown level1 summary"><p>This constructor creates a new instance of <a class="xref" href="CG.Blazor.Forms.Attributes.MudBlazorAttribute.html">MudBlazorAttribute</a>
-class.</p>
+  <h5 id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+This attribute is only valid when placed on a class definition.
+</p>
+<p>
+This attribute looks for object properties decorated with the <a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudTabPanelAttribute.html">RenderMudTabPanelAttribute</a>
+attribute. Any properties not properly decorated are ignored. Any properties
+that aren&apos;t of object type are ignored. 
+</p>
+<p>
+This attribute is only effective when applied to the top-level model&apos;s class
+definition. It is not intended to be used for generating tabs on ancestor
+models (child, grandchild great-grandchild, etc).
+</p>
 </div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected MudBlazorAttribute()</code></pre>
-  </div>
-  <h3 id="properties">Properties
-  </h3>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Class_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Class*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Class" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Class">Class</h4>
-  <div class="markdown level1 summary"><p>This property contains user class names, separated by space</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Class { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Style_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Style*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Style" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Style">Style</h4>
-  <div class="markdown level1 summary"><p>This property contains user styles, applied on top of the component's
-own classes and styles</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Style { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Tag_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Tag*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_Tag" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.Tag">Tag</h4>
-  <div class="markdown level1 summary"><p>This property contain a tag to attach any user data object to the component
-for your convenience.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public object Tag { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_UserAttributes_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.UserAttributes*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_UserAttributes" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.UserAttributes">UserAttributes</h4>
-  <div class="markdown level1 summary"><p>This property contains attributes you add to the component that don't match
-any of its parameters. They will be splatted onto the underlying HTML tag.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; UserAttributes { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <h5 id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute_examples"><strong>Examples</strong></h5>
+  <p>Here is an example of decorating a view-model to render content within a
+<span class="xref">MudBlazor.MudTabs</span> component:</p>
+<pre><code>using CG.Blazor.Forms.Attributes;
+
+[RenderMudTabs]
+class MyModel
+{
+    [RenderMudTabPanel(Text = &quot;Panel A&quot;)]
+    public MyModel2 MyProperty { get; set; }
+}</code></pre>
+
   <h3 id="methods">Methods
   </h3>
-  <a id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_ToAttributes_" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.ToAttributes*"></a>
-  <h4 id="CG_Blazor_Forms_Attributes_MudBlazorAttribute_ToAttributes" data-uid="CG.Blazor.Forms.Attributes.MudBlazorAttribute.ToAttributes">ToAttributes()</h4>
+  <a id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute_Generate_" data-uid="CG.Blazor.Forms.Attributes.RenderMudTabsAttribute.Generate*"></a>
+  <h4 id="CG_Blazor_Forms_Attributes_RenderMudTabsAttribute_Generate_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_System_Int32_Microsoft_AspNetCore_Components_IHandleEvent_System_Collections_Generic_Stack_System_Object__System_Reflection_PropertyInfo_Microsoft_Extensions_Logging_ILogger_CG_Blazor_Forms_Services_IFormGenerator__" data-uid="CG.Blazor.Forms.Attributes.RenderMudTabsAttribute.Generate(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.IHandleEvent,System.Collections.Generic.Stack{System.Object},System.Reflection.PropertyInfo,Microsoft.Extensions.Logging.ILogger{CG.Blazor.Forms.Services.IFormGenerator})">Generate(RenderTreeBuilder, Int32, IHandleEvent, Stack&lt;Object&gt;, PropertyInfo, ILogger&lt;IFormGenerator&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override IDictionary&lt;string, object&gt; ToAttributes()</code></pre>
+    <pre><code class="lang-csharp hljs">public override int Generate(RenderTreeBuilder builder, int index, IHandleEvent eventTarget, Stack&lt;object&gt; path, PropertyInfo prop, ILogger&lt;IFormGenerator&gt; logger)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder</span></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Components.IHandleEvent</span></td>
+        <td><span class="parametername">eventTarget</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Stack</span>&lt;<span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Reflection.PropertyInfo</span></td>
+        <td><span class="parametername">prop</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<span class="xref">CG.Blazor.Forms.Services.IFormGenerator</span>&gt;</td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -377,13 +324,13 @@ any of its parameters. They will be splatted onto the underlying HTML tag.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="xref">System.Int32</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">CG.Blazor.Forms.Attributes.FormGeneratorAttribute.ToAttributes()</span></div>
+  <div><span class="xref">CG.Blazor.Forms.Attributes.RenderObjectAttribute.Generate(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder, System.Int32, Microsoft.AspNetCore.Components.IHandleEvent, System.Collections.Generic.Stack&lt;System.Object&gt;, System.Reflection.PropertyInfo, Microsoft.Extensions.Logging.ILogger&lt;CG.Blazor.Forms.Services.IFormGenerator&gt;)</span></div>
 </article>
           </div>
           

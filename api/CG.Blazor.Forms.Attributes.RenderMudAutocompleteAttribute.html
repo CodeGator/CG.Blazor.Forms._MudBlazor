@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class RenderMudAutocompleteAttribute
    ">
-    <meta name="generator" content="docfx 2.58.0.0">
+    <meta name="generator" content="docfx 2.58.2.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,7 +83,10 @@
   
   <h1 id="CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute" data-uid="CG.Blazor.Forms.Attributes.RenderMudAutocompleteAttribute" class="text-break">Class RenderMudAutocompleteAttribute
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>This class is an attribute that, when applied to a string property, causes
+the form generator to render the property as a <span class="xref">MudBlazor.MudAutocomplete`1</span>
+component.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -238,9 +241,36 @@
   <h6><strong>Assembly</strong>: CG.Blazor.Forms._MudBlazor.dll</h6>
   <h5 id="CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Property)]
+    <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class RenderMudAutocompleteAttribute : MudBlazorAttribute</code></pre>
   </div>
+  <h5 id="CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+This attribute is only valid when placed on a property of type: string.
+</p>
+<p>
+When configured to do so, this attribute causes the form generator to wire 
+up a search function for the auto-complete behavior. In order to configure 
+that behavior, the <a class="xref" href="CG.Blazor.Forms.Attributes.RenderMudAutocompleteAttribute.html#CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute_SearchFunc">SearchFunc</a> 
+parameter should be set to the name of a method on the model. Then, at form 
+generation time, the form generator will locate that method and wire up a 
+callback.
+</p>
+</div>
+  <h5 id="CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute_examples"><strong>Examples</strong></h5>
+  <p>Here is an example of decorating a model property to render a <span class="xref">MudBlazor.MudAutocomplete`1</span>:</p>
+<pre><code>using CG.Blazor.Forms.Attributes;
+class MyModel
+{
+    [RenderMudAutocomplete(SearchFunc = &quot;Search1&quot;)]
+    public string MyProperty { get;set; }
+
+    public async Task{IEnumerable{string}} Search1(string value)
+    {
+       // TODO : write search code here.
+    }
+}</code></pre>
+
   <h3 id="constructors">Constructors
   </h3>
   <a id="CG_Blazor_Forms_Attributes_RenderMudAutocompleteAttribute__ctor_" data-uid="CG.Blazor.Forms.Attributes.RenderMudAutocompleteAttribute.#ctor*"></a>

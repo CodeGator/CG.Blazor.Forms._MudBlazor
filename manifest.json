@@ -206,11 +206,47 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/CG.Blazor.Forms.Attributes.RenderMuddyGroupBoxAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CG.Blazor.Forms.Attributes.RenderMuddyGroupBoxAttribute.html",
+          "hash": "PFl4l/QqUjO7E41HxzguVHpkW2dGFCwQC7GXXmUKU3Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/CG.Blazor.Forms.Attributes.yml",
       "output": {
         ".html": {
           "relative_path": "api/CG.Blazor.Forms.Attributes.html",
-          "hash": "Qllv84xbhnxwaVTCgHxgmTr+Zr0My9qrEPFexVaDeRo="
+          "hash": "KPx1zBOHbG/Ll/DDo5NIP3u4qmOKkJwGUgfsHhkR9kQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CG.Blazor.Forms.Components.MuddyGroupBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CG.Blazor.Forms.Components.MuddyGroupBox.html",
+          "hash": "CVG9m/eHSa5C7+chp8T+c3cgGMcXAO4gtCzI9NB8bKQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CG.Blazor.Forms.Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CG.Blazor.Forms.Components.html",
+          "hash": "fXRKRY1+7s70YND94WjQR4cFjcm1kbymJDWPTYTbS40="
         }
       },
       "is_incremental": false,
@@ -222,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "mLJwupoknFR14XB8kyHYu5/JpPO1CP+t5ZB+wmP+HGs="
+          "hash": "lcZCeE4Bcys/2AUeqBKfzL7UkCl4EfDeWwKvZ4BnbuE="
         }
       },
       "is_incremental": false,
@@ -341,7 +377,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 17,
+          "total_file_count": 20,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

@@ -373,7 +373,7 @@ namespace CG.Blazor.Forms.Attributes
         /// <param name="prop">The reflection information for the property.</param>
         /// <param name="logger">The logger to use for the operation.</param>
         /// <returns>The index after rendering is complete.</returns>
-        private int RenderProperties(
+        private static int RenderProperties(
             RenderTreeBuilder builder,
             int index,
             IHandleEvent eventTarget,

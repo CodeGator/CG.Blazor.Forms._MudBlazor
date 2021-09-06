@@ -231,8 +231,13 @@ namespace CG.Blazor.Forms.Attributes
 
         /// <summary>
         /// This property contains the name of an optional search function, on 
-        /// the associated model.
+        /// either the top-level view-model, or the the associated model.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The method should have this signature: Task{IEnumerable{string}} Method(string value)
+        /// </para>
+        /// </remarks>
         public string SearchFunc { get; set; }
 
         /// <summary>

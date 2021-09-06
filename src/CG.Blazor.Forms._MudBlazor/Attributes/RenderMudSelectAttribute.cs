@@ -1,5 +1,4 @@
-﻿using CG.Blazor.Forms.Attributes;
-using CG.Blazor.Forms.Services;
+﻿using CG.Blazor.Forms.Services;
 using CG.Validations;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.CompilerServices;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace CG.Blazor.Forms.Attributes
 {
@@ -181,6 +181,18 @@ namespace CG.Blazor.Forms.Attributes
         public string Options { get; set; }
 
         /// <summary>
+        /// This property contains the name of an optional function, on either the 
+        /// top-level view-model, or the the associated model. That returns a list
+        /// of strings, for options. 
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The method should have this signature: IEnumerable{string} Func()
+        /// </para>
+        /// </remarks>
+        public string OptionsFunc { get; set; }
+
+        /// <summary>
         /// This property contains the pattern attribute, when specified, is a regular 
         /// expression which the input's value must match in order for the value to 
         /// pass constraint validation. It must be a valid JavaScript regular expression.
@@ -246,6 +258,7 @@ namespace CG.Blazor.Forms.Attributes
             OffsetY = false;
             OpenIcon = string.Empty;
             Options = string.Empty;
+            OptionsFunc = string.Empty;
             Pattern = string.Empty;
             ReadOnly = false;
             Strict = false;
@@ -441,6 +454,8 @@ namespace CG.Blazor.Forms.Attributes
                 attr[nameof(OpenIcon)] = OpenIcon;
             }
 
+            // Note: the options are deliberately not added to the attributes.
+
             // Does this property have a non-default value?
             if (false == string.IsNullOrEmpty(Pattern))
             {
@@ -526,9 +541,7 @@ namespace CG.Blazor.Forms.Attributes
                     // Return the index.
                     return index;
                 }
-
                 
-
                 // Get the property's parent.
                 var propParent = path.Skip(1).First();
 
@@ -590,8 +603,41 @@ namespace CG.Blazor.Forms.Attributes
                         attributes: attributes,
                         contentDelegate: childBuilder =>
                         {
+                            // How should we build the options?
+                            IEnumerable<string> options;
+
+                            // Get the view-model.
+                            var viewModel = path.Last();
+
+                            // Try to resolve the options func.
+                            if (TryOptionsFunc(
+                                viewModel,
+                                propParent,
+                                out var func
+                                ))
+							{
+                                // If we get here then we resolved the options 
+                                //   func, so let's use it now to populate the
+                                //   options.
+
+                                // Invoke the function.
+                                options = func.Invoke().Result
+                                    .Select(x => x.Trim())
+                                    .ToArray();
+                            }
+							else
+							{
+                                // If we get here then we failed to resolve the
+                                //   options func, so, try to use the options
+                                //   property instead.
+
+                                // Split the options.
+                                options = Options.Split(',')
+                                    .Select(x => x.Trim())
+                                    .ToArray();
+                            }
+
                             // Loop through the options
-                            var options = Options.Split(',');
                             foreach (var option in options)
                             {
                                 var index2 = index; // Reset the index.
@@ -638,5 +684,89 @@ namespace CG.Blazor.Forms.Attributes
         }
 
         #endregion
-    }
+
+        // *******************************************************************
+        // Private methods.
+        // *******************************************************************
+
+        #region Private methods
+
+        /// <summary>
+        /// This method checks the <see cref="OptionsFunc"/> property and,
+        /// if the property is populated, searches on the view-model and
+        /// the model for a matching function. That functio is then called
+        /// and the resilts are returned to <paramref name="func"/>.
+        /// </summary>
+        /// <param name="viewModel">The view-model to use for the operation.</param>
+        /// <param name="propParent">The model to use for the operation.</param>
+        /// <param name="func">The output parameter, which is assigned a 
+        /// reference to a func, if one is found.</param>
+        /// <returns>True if the <see cref="OptionsFunc"/> property contains 
+        /// the name of a method on either the view-model, or the model; False
+        /// if not.</returns>
+        private bool TryOptionsFunc(
+            object viewModel,
+            object propParent,
+            out Func<Task<IEnumerable<string>>> func
+            )
+		{
+            func = null;
+
+            // Is the property populated?
+            if (false == string.IsNullOrEmpty(OptionsFunc))
+			{
+                // Create possible targets for the search.
+                var targets = (viewModel == propParent)
+                    ? new[] { viewModel }
+                    : new[] { viewModel, propParent };
+
+                // Loop and look for the function.
+                foreach (var target in targets)
+				{
+                    // Get the target type.
+                    var targetType = target.GetType();
+
+                    // Look for the named method.
+                    var methodInfo = targetType.GetMethod(
+                        OptionsFunc,
+                        BindingFlags.Public |
+                        BindingFlags.NonPublic |
+                        BindingFlags.Instance
+                        );
+
+                    // Did we succeed?
+                    if (null != methodInfo)
+					{
+                        // Create a viewModel reference expression.
+                        var viewModelExp = Expression.Constant(
+                            target
+                            );
+
+                        // Create the method call expression.
+                        var callExp = Expression.Call(
+                            viewModelExp,
+                            methodInfo
+                            );
+
+                        // Create a lambda expression.
+                        var lambdaExp = Expression.Lambda<Func<Task<IEnumerable<string>>>>(
+                            callExp,
+                            callExp.Arguments.OfType<ParameterExpression>()
+                            );
+
+                        // Compile the expression to a func.
+                        func = lambdaExp.Compile();
+
+                        // We found the func.
+                        return true;
+                    }
+                }
+            }
+
+            // We didn't find the func.
+            return false;
+		}
+
+		#endregion
+	}
 }

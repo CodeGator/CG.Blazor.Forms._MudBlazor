@@ -2733,6 +2733,19 @@ references:
   isSpec: "True"
   fullName: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.Options
   nameWithType: RenderMudRadioGroupAttribute.Options
+- uid: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc
+  name: OptionsFunc
+  href: api/CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.html#CG_Blazor_Forms_Attributes_RenderMudRadioGroupAttribute_OptionsFunc
+  commentId: P:CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc
+  fullName: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc
+  nameWithType: RenderMudRadioGroupAttribute.OptionsFunc
+- uid: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc*
+  name: OptionsFunc
+  href: api/CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.html#CG_Blazor_Forms_Attributes_RenderMudRadioGroupAttribute_OptionsFunc_
+  commentId: Overload:CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc
+  isSpec: "True"
+  fullName: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.OptionsFunc
+  nameWithType: RenderMudRadioGroupAttribute.OptionsFunc
 - uid: CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.Placement
   name: Placement
   href: api/CG.Blazor.Forms.Attributes.RenderMudRadioGroupAttribute.html#CG_Blazor_Forms_Attributes_RenderMudRadioGroupAttribute_Placement
@@ -3132,6 +3145,19 @@ references:
   isSpec: "True"
   fullName: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.Options
   nameWithType: RenderMudSelectAttribute.Options
+- uid: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc
+  name: OptionsFunc
+  href: api/CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.html#CG_Blazor_Forms_Attributes_RenderMudSelectAttribute_OptionsFunc
+  commentId: P:CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc
+  fullName: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc
+  nameWithType: RenderMudSelectAttribute.OptionsFunc
+- uid: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc*
+  name: OptionsFunc
+  href: api/CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.html#CG_Blazor_Forms_Attributes_RenderMudSelectAttribute_OptionsFunc_
+  commentId: Overload:CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc
+  isSpec: "True"
+  fullName: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.OptionsFunc
+  nameWithType: RenderMudSelectAttribute.OptionsFunc
 - uid: CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.Pattern
   name: Pattern
   href: api/CG.Blazor.Forms.Attributes.RenderMudSelectAttribute.html#CG_Blazor_Forms_Attributes_RenderMudSelectAttribute_Pattern

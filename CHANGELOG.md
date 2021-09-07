@@ -9,6 +9,8 @@
 
 * I added an OptionsExp property to the RenderMudSelectAttribute and RenderMudRadioGroupAttribute classes to allow fetching options from a live data source.
 
+* I added the missing label to the RenderMudSliderAttribute.
+
 
 
 

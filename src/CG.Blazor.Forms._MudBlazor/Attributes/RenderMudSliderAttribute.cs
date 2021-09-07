@@ -444,8 +444,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<byte>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -469,8 +473,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<byte?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -546,8 +554,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<short>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -581,8 +593,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<short?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -658,8 +674,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<int>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -694,8 +714,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<int?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -771,8 +795,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<long>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -796,8 +824,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<long?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -873,8 +905,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<float>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -898,8 +934,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<float?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -975,8 +1015,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<double>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -1000,8 +1044,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<double?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.
@@ -1077,8 +1125,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<decimal>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Otherwise, the property IS nullable.
@@ -1102,8 +1154,12 @@ namespace CG.Blazor.Forms.Attributes
                 // Render as a MudSlider control.
                 index = builder.RenderUIComponent<MudSlider<decimal?>>(
                     index++,
-                    attributes: attributes
-                    );
+                    attributes: attributes,
+                    contentDelegate: contentBuilder =>
+                    {
+                        // Add a label for the component.
+                        contentBuilder.AddContent(index++, attributes["Label"]);
+                    });
             }
 
             // Return the index.

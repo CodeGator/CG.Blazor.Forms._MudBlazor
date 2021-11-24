@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>CG.Blazor.Forms</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,8 +11,8 @@
     <Description>This package contains MudBlazor extensions used by the CG.Blazor.Forms package. 
 
 Platforms supported:
-    .NET 5.x or above</Description>
-    <Copyright>Copyright © 2021 by CodeGator. All rights reserved.</Copyright>
+    .NET 6.x or above</Description>
+    <Copyright>Copyright © 2021 - 2022 by CodeGator. All rights reserved.</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/CodeGator/CG.Blazor.Forms._MudBlazor</PackageProjectUrl>
     <PackageIcon>packageDefaultIcon-50x50.png</PackageIcon>
@@ -23,7 +23,7 @@ Platforms supported:
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\net5.0\CG.Blazor.Forms._MudBlazor.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net6.0\CG.Blazor.Forms._MudBlazor.xml</DocumentationFile>
   </PropertyGroup>
 
   
@@ -32,10 +32,10 @@ Platforms supported:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Blazor.Forms" Version="2021.2.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.10" />
-    <PackageReference Include="MudBlazor" Version="5.1.4" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+    <PackageReference Include="CG.Blazor.Forms" Version="2022.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    <PackageReference Include="MudBlazor" Version="6.0.2" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

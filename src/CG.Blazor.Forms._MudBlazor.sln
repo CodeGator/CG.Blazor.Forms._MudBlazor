@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Blazor.Forms.Tests._MudBlazor", "..\tests\CG.Blazor.Forms._MudBlazor.Tests\CG.Blazor.Forms.Tests._MudBlazor.csproj", "{444F01A6-66E0-4CF4-A095-50D5594A5412}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Blazor.Forms._MudBlazor", "CG.Blazor.Forms._MudBlazor\CG.Blazor.Forms._MudBlazor.csproj", "{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CG.Blazor.Forms._MudBlazor", "CG.Blazor.Forms._MudBlazor\CG.Blazor.Forms._MudBlazor.csproj", "{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Blazor.Forms._MudBlazor.Tests", "..\tests\CG.Blazor.Forms._MudBlazor.Tests\CG.Blazor.Forms._MudBlazor.Tests.csproj", "{7373375A-3EF8-4144-9E93-9213A75E8E2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{444F01A6-66E0-4CF4-A095-50D5594A5412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{444F01A6-66E0-4CF4-A095-50D5594A5412}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{444F01A6-66E0-4CF4-A095-50D5594A5412}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{444F01A6-66E0-4CF4-A095-50D5594A5412}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83A86422-46CD-4D86-A9DC-57FB96E1F5D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7373375A-3EF8-4144-9E93-9213A75E8E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7373375A-3EF8-4144-9E93-9213A75E8E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7373375A-3EF8-4144-9E93-9213A75E8E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7373375A-3EF8-4144-9E93-9213A75E8E2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

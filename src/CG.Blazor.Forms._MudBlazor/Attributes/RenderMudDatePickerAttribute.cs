@@ -571,7 +571,8 @@ namespace CG.Blazor.Forms.Attributes
                 var propParent = path.Skip(1).First();
 
                 // Should we bind to a DateTime?
-                if (propertyType == typeof(DateTime))
+                if (propertyType == typeof(DateTime) ||
+                    propertyType == typeof(Nullable<DateTime>))
                 {
                     index = BindToDateTime(
                         builder,
@@ -586,6 +587,7 @@ namespace CG.Blazor.Forms.Attributes
                         );
                 }
 
+                // Otherwise, we don't know this type ...
                 else
                 {
                     // Let the world know what we're doing.

@@ -14,6 +14,12 @@ namespace CG.Blazor.Forms._MudBlazor.QuickStart.ViewModels
     [RenderDataAnnotationsValidator]
     public class MudBlazorVM
     {
+        [RenderMudDatePicker]
+        public DateTime? DateOfBirth { get; set; }
+        
+        [RenderMudTimePicker]
+        public TimeSpan? TimeOfBirth { get; set; }
+
         [RenderMudTextField]
         [Required]
         public string A1 { get; set; } = "A1 value";

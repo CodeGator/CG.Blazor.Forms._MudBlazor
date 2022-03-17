@@ -491,7 +491,8 @@ namespace CG.Blazor.Forms.Attributes
                 var propParent = path.Skip(1).First();
 
                 // Should we bind to a TimeSpan?
-                if (propertyType == typeof(TimeSpan))
+                if (propertyType == typeof(TimeSpan) ||
+                    propertyType == typeof(Nullable<TimeSpan>))
                 {
                     index = BindToTimeSpan(
                         builder,

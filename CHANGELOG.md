@@ -5,6 +5,7 @@
 
 * I switched the runtime to .net 6.0
 * bug fixes
+* I added a WASM sample application.
 
 ## 2021.1
 

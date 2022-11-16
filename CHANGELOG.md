@@ -1,6 +1,10 @@
 # CG.Blazor.Forms._MudBlazor
 ---
 
+## 2023.1
+
+* bug fixes
+
 ## 2022.1
 
 * I switched the runtime to .net 6.0
